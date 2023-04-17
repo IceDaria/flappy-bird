@@ -43,13 +43,13 @@ update() {
       if (pos.x < -this.w) {
         this.pipesArray.shift();
       }
-      score.currentScore += 3;
+      score.currentScore += 1;
       pos.isCounted = true;
       SOUNDS.SCORE.play();
       score.hightScore = Math.max(score.currentScore, score.hightScore);
       localStorage.setItem("hightScore", score.hightScore);
 
-      if (score.currentScore % 3 === 0) {
+      if (score.currentScore % 10 === 0) {
         SPEED += 0.25;
       }
     }
