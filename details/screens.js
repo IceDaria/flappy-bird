@@ -1,3 +1,4 @@
+// определяем плашку Get Raady
 class getReady {
   constructor() {
     this.img = {
@@ -16,7 +17,9 @@ class getReady {
     }  
 }
 
+// определяем плашку проигрыша
 class gameOver {
+  // сама плашка
   img = {
     sX: 175,
     sY: 228,
@@ -26,6 +29,7 @@ class gameOver {
     y: 90
   };
   
+  // медали
   medal = {
     golden: { sX: 310, sY: 158 },
     silver: { sX: 358, sY: 113 },
@@ -37,9 +41,9 @@ class gameOver {
     context.drawImage(sprite, this.img.sX, this.img.sY, this.img.w, this.img.h, this.img.x, this.img.y, this.img.w, this.img.h);
     
     const { golden, silver, source } = this.medal;                  
-
+// пишем условие выбора медали
     const medalToDraw = (score.currentScore >= score.highScore) ? golden : silver;
-// рисуем медаль    
+// рисуем нужную медаль медаль  
     context.drawImage(sprite, medalToDraw.sX, medalToDraw.sY, source.sW, source.sH, source.x, source.y, source.sW, source.sH);
   }
 }
