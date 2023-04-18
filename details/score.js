@@ -1,24 +1,27 @@
+// определяем класс счёта
 class Score {
     constructor() {
-      this.hightScore = parseInt(localStorage.getItem("hightScore")) || 0;
+// определяем переменные, рекорд проверяем на наличие в хранилище
+      this.highScore = parseInt(localStorage.getItem("highScore")) || 0;
       this.currentScore = 0;
     }
 
     draw() {
-        if (state.current == state.game) {
+        if (state.current == state.game) { // рисуем счёт во время игры
             context.lineWidth = 2;
             context.font = "30px 'Press Start 2P', cursive";
             context.strokeStyle = "#e10b25";
             context.strokeText(this.currentScore, 150, 50);
-        } else if (state.current == state.over) {
+        } else if (state.current == state.over) { // рисуем счет после окончания игры
            context.font = "20px 'Press Start 2P', cursive";
+           // текущий
            context.strokeText(this.currentScore, 225, 188);
-        
-           context.strokeText(this.hightScore, 220, 230);
+           // лучщий
+           context.strokeText(this.highScore, 220, 230);
         }
     }
 
-    reset() {
+    reset() { // ресетим
         this.currentScore = 0;
     }
 }
