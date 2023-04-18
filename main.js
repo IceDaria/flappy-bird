@@ -1,11 +1,11 @@
 // создаём все нужные объекты
+const score = new Score();
 const gReady = new getReady()
 const gOver = new gameOver();
 const bg = new Background();
 const fg = new Foreground();
 const bird = new Bird();
 const pipes = new Pipes()
-const score = new Score();
 
 // Обработчик клика на экране
 canvas.addEventListener('click', (event) => {
@@ -75,15 +75,10 @@ function resetGame() {
   state.current = state.getReady;
 }
 
-// функция апдейта
-function update(){
-    bird.update();
-    pipes.update();
-}
-
 // функция запуска игры и обратотки анимации
 function loop(){
-    update();
+    bird.update();
+    pipes.update();
     draw();
     frames++;
     
