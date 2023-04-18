@@ -37,7 +37,7 @@ checkCollision() {
   }
 
 // проверяем прошла ли птицы середину трубы, если да, то счёт увеличивается на 1
-  checkPassed() {
+  checkPassed(pipe) {
     const middleOfGap = pipe.x + this.w / 2;
     if (middleOfGap < bird.x && !pipe.isCounted) {
       if (pipe.x < -this.w) {
