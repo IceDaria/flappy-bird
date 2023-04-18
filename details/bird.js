@@ -50,6 +50,7 @@ class Bird {
   this.jump += this.gravity;
   this.y += this.jump;
 
+  // определяем правила столкновения с землёй
   if (this.y + this.size[1] / 2 >= canvas.height - fg.fg.sH) {
     this.y = canvas.height - fg.fg.sH - this.size[1] / 2;
     if (state.current === state.game) {
@@ -59,23 +60,25 @@ class Bird {
   }
 }
 
-//обновляем свойства птицы в соответствии с текущим состоянием игры 
+
   update() {
-    // птичка хлопает крылышками медленнее, если игра не начата
+  // птичка хлопает крылышками медленнее, если игра не начата
   this.period = state.current == state.getReady ? 10 : 5;
+  // циклично анимируем птицу, выбирая frame из массива анимации, 
+  // выбираем направление движения цикла
   this.frame += this.direction * (frames % this.period == 0 ? 1 : 0);
   if (this.frame >= this.animation.length - 1 && this.direction == 1) {
     this.direction = -1;
   } else if (this.frame <= 0 && this.direction == -1) {
     this.direction = 1;
   }
-
+// определем логику поворота птички в зависимости от её состояния, выбираем кадр для отрисовки
   if (state.current == state.getReady) {
     this.y = 150; 
     this.rotation = 0 * DEGREE;
   } else {
     this.fall(); // используем метод "fall" для обновления позиции птицы
-    if (this.jump >= this.speed) {// определяем логику поворота птички в зависимости от её состояния
+    if (this.jump >= this.speed) {
       this.rotation = 90 * DEGREE;
       this.frame = 1;
     } else {
@@ -83,7 +86,7 @@ class Bird {
     }
   }
 }
- 
+// обнуляем 
   speedReset() {
     this.jump = 0;
   };
