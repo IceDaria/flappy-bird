@@ -85,3 +85,30 @@ function loop(){
     requestAnimationFrame(loop);
 }
 loop();
+
+// ВТОРОЙ ВАРИАНТ ФУНКЦИИ ЛУПА, НО ОН МНЕ НЕ КАЖЕТСЯ ОПТИМАЛЬНЫМ
+//let frameRate = 60; // Желаемая частота кадров (FPS)
+//let frameDelay = 1000 / frameRate; // Задержка между кадрами в миллисекундах
+
+//function loop(){
+   // let currentTime = performance.now();
+    //let elapsed = currentTime - lastFrameTime;
+    //if (elapsed < frameDelay) {
+    // Если прошло меньше времени, чем задержка между кадрами, ждем оставшееся время
+     // setTimeout(loop, frameDelay - elapsed);
+     // return;
+    //}
+
+  // Обновляем последнее время кадра
+   // lastFrameTime = currentTime;
+  
+   // pipes.update();
+   // bird.update();
+   // draw();
+   // frames++;
+
+   // requestAnimationFrame(loop);
+//}
+
+// let lastFrameTime = performance.now();
+// loop();
