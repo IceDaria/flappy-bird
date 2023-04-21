@@ -1,3 +1,4 @@
+// определяем класс фона с городом
 class Background {
   constructor() {
     this.bg = {
@@ -24,10 +25,10 @@ class Background {
         y: 240,
         w: canvas.width,
       };
-      
+    // рисуем анимированный фон при стадии игры  
       context.drawImage(sprite, this.bg.sX, this.bg.sY, this.bg.sW, this.bg.sH, bgPart1.x, bgPart1.y, bgPart1.w, this.bg.sH);
       context.drawImage(sprite, this.bg.sX, this.bg.sY, this.bg.sW, this.bg.sH, bgPart2.x, bgPart2.y, bgPart2.w, this.bg.sH);
-    } else { 
+    } else { // рисуем статичный фон в любых других случаях
       context.drawImage(sprite, this.bg.sX, this.bg.sY, this.bg.sW, this.bg.sH, 0, 240, canvas.width, this.bg.sH);
     }
   };
