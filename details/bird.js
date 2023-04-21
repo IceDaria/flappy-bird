@@ -1,5 +1,3 @@
-// создаём класс птички
-
 class Bird {
   constructor () {
 // определяем массив спрайтов для анимации
@@ -43,17 +41,29 @@ class Bird {
     context.restore();
   };
 
+//обновляем свойства птицы в соответствии с текущим состоянием игры 
   update() {
-    this.period = state.current === state.getReady ? 10 : 5;
-    this.frame += this.direction * (frames % this.period === 0 ? 1 : 0);
-    if (this.frame >= this.animation.length - 1 && this.direction === 1) {
-      this.direction = -1;
-    } else if (this.frame <= 0 && this.direction === -1) {
-      this.direction = 1;
-    }
-    this.fall();
-    this.updateRotation();
+  this.period = state.current == state.getReady ? 10 : 5;
+  this.frame += this.direction * (frames % this.period == 0 ? 1 : 0);
+  if (this.frame >= this.animation.length - 1 && this.direction == 1) {
+    this.direction = -1;
+  } else if (this.frame <= 0 && this.direction == -1) {
+    this.direction = 1;
   }
+
+  if (state.current == state.getReady) {
+    this.y = 150; 
+    this.rotation = 0 * DEGREE;
+  } else {
+    this.fall(); // используем метод "fall" для обновления позиции птицы
+    if (this.jump >= this.speed) {
+      this.rotation = 90 * DEGREE;
+      this.frame = 1;
+    } else {
+      this.rotation = -25 * DEGREE;
+    }
+  }
+}
 
   // задаём силу прыжка
   flap() {
@@ -67,20 +77,25 @@ class Bird {
     this.checkCollision(); // используем метод "checkCollision" для проверки столкновения
   }
 
-// определем логику поворота птички в зависимости от её состояния, выбираем кадр для отрисовки
-  updateRotation() {
-    if (state.current === state.getReady) {
-      this.y = 150; 
-      this.rotation = 0 * DEGREE;
-    } else {
-      if (this.jump >= this.speed) {
-        this.rotation = 90 * DEGREE;
-        this.frame = 1;
-      } else {
-        this.rotation = -25 * DEGREE;
-      }
-    }
-  }
+// МЕТОД НЕ УДАЛОСЬ ВЫНЕСТИ, ТАК КАК ПРИ ТАКОМ ВАРИАНТЕ 
+// ПРИ НАЧАЛЕ(ПРИ ЗАГРУЗКЕ СТРАНИЦЫ) ИГРЫ ПТИЦА КАМНЕМ ПАДАЛА ВНИЗ
+  
+// определем логику поворота птички в зависимости от её состояния, 
+// выбираем кадр для отрисовки
+//  updateRotation() {
+//    if (state.current === state.getReady) {
+//      this.y = 150; 
+//      this.rotation = 0 * DEGREE;
+//    } else {
+//      this.fall();
+//      if (this.jump >= this.speed) {
+//        this.rotation = 90 * DEGREE;
+//        this.frame = 1;
+//      } else {
+//        this.rotation = -25 * DEGREE;
+//      }
+//    }
+//  }
 
 // определяем логику столкновения птицы с землёй
   checkCollision() {
