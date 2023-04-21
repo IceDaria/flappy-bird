@@ -10,7 +10,7 @@ class getReady {
       y: 80,
     }
    };
-    
+  // отрисовываем на стадии подготовки 
     draw() { if(state.current === state.getReady) {
             context.drawImage(sprite, this.img.sX, this.img.sY, this.img.w, this.img.h, this.img.x, this.img.y, this.img.w, this.img.h);
         }
@@ -35,7 +35,8 @@ class gameOver {
     silver: { sX: 358, sY: 113 },
     source: { sW: 45, sH: 45, x: 72, y: 177 }
   };
-   
+  
+  // отрисовываем плашку в конце игры 
   drawGameOver() { if (state.current !== state.over) return;
                   
     context.drawImage(sprite, this.img.sX, this.img.sY, this.img.w, this.img.h, this.img.x, this.img.y, this.img.w, this.img.h);
@@ -43,7 +44,8 @@ class gameOver {
     const { golden, silver, source } = this.medal;                  
 // пишем условие выбора медали
     const medalToDraw = (score.currentScore >= score.highScore) ? golden : silver;
-// рисуем нужную медаль медаль  
+// рисуем нужную медаль медаль исходя из условий
     context.drawImage(sprite, medalToDraw.sX, medalToDraw.sY, source.sW, source.sH, source.x, source.y, source.sW, source.sH);
   }
 }
+
