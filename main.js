@@ -39,7 +39,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 // обработчик события для управления на телефоне
-canvas.addEventListener('touchstart', (event) => {
+canvas.addEventListener('touchend', (event) => {
   event.preventDefault();
   if (state.current === state.game) {
     handleFlap();
