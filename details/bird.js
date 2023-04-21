@@ -1,28 +1,31 @@
+// создаём класс птички
+
 class Bird {
-  constructor () {}
+  constructor () {
 // определяем массив спрайтов для анимации
-  animation = [
+  this.animation = [
     { sX: 276, sY: 112 },
     { sX: 276, sY: 139 },
     { sX: 276, sY: 164 }
   ];
-  size = [34, 26]
-  x = 50;
-  y = 150;
-  radius = 12;
+  this.size = [34, 26]
+  this.x = 50;
+  this.y = 150;
+  this.radius = 12;
   
   // константы для осуществения анимации
-  frame = 0;
-  direction = 1;
+  this.frame = 0;
+  this.direction = 1;
   
   // константы для физики птицы
-  gravity = 0.25;
-  speed = 3;
-  jump = 0;
+  this.gravity = 0.25;
+  this.speed = 3;
+  this.jump = 0;
 
   // константы для вращения птицы
-  rotation = 0;
-  period = 0;
+  this.rotation = 0;
+  this.period = 0;
+  }
 
 // рисуем птичку на канвасе
   draw () {
@@ -40,52 +43,56 @@ class Bird {
     context.restore();
   };
 
-// задаём силу прыжка
+  update() {
+    this.period = state.current === state.getReady ? 10 : 5;
+    this.frame += this.direction * (frames % this.period === 0 ? 1 : 0);
+    if (this.frame >= this.animation.length - 1 && this.direction === 1) {
+      this.direction = -1;
+    } else if (this.frame <= 0 && this.direction === -1) {
+      this.direction = 1;
+    }
+    this.fall();
+    this.updateRotation();
+  }
+
+  // задаём силу прыжка
   flap() {
     this.jump = -this.speed;
   };
 
-// определяем логику падения птички
+  // определяем логику падения птички
   fall() {
-  this.jump += this.gravity;
-  this.y += this.jump;
-
-  // определяем правила столкновения с землёй
-  if (this.y + this.size[1] / 2 >= canvas.height - fg.fg.sH) {
-    this.y = canvas.height - fg.fg.sH - this.size[1] / 2;
-    if (state.current === state.game) {
-      state.current = state.over;
-      SOUNDS.DIE.play();
-    }
+    this.jump += this.gravity;
+    this.y += this.jump;
+    this.checkCollision(); // используем метод "checkCollision" для проверки столкновения
   }
-}
 
-
-  update() {
-  // птичка хлопает крылышками медленнее, если игра не начата
-  this.period = state.current == state.getReady ? 10 : 5;
-  // циклично анимируем птицу, выбирая frame из массива анимации, 
-  // выбираем направление движения цикла
-  this.frame += this.direction * (frames % this.period == 0 ? 1 : 0);
-  if (this.frame >= this.animation.length - 1 && this.direction == 1) {
-    this.direction = -1;
-  } else if (this.frame <= 0 && this.direction == -1) {
-    this.direction = 1;
-  }
 // определем логику поворота птички в зависимости от её состояния, выбираем кадр для отрисовки
-  if (state.current == state.getReady) {
-    this.y = 150; 
-    this.rotation = 0 * DEGREE;
-  } else {
-    this.fall(); // используем метод "fall" для обновления позиции птицы
-    if (this.jump >= this.speed) {
-      this.rotation = 90 * DEGREE;
-      this.frame = 1;
+  updateRotation() {
+    if (state.current === state.getReady) {
+      this.y = 150; 
+      this.rotation = 0 * DEGREE;
     } else {
-      this.rotation = -25 * DEGREE;
+      if (this.jump >= this.speed) {
+        this.rotation = 90 * DEGREE;
+        this.frame = 1;
+      } else {
+        this.rotation = -25 * DEGREE;
+      }
     }
   }
-}
+
+// определяем логику столкновения птицы с землёй
+  checkCollision() {
+    if (this.y + this.size[1] / 2 >= canvas.height - fg.fg.sH) {
+      this.y = canvas.height - fg.fg.sH - this.size[1] / 2;
+      if (state.current === state.game) {
+        state.current = state.over;
+        SOUNDS.DIE.play();
+      }
+    }
+  }
+
 // обнуляем 
   speedReset() {
     this.jump = 0;
