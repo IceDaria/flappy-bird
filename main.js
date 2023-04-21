@@ -38,6 +38,17 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+// обработчик события для управления на телефоне
+canvas.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  if (state.current === state.game) {
+    handleFlap();
+  } else if (state.current === state.over && isClickOnStartBtn(event.touches[0].clientX, event.touches[0].clientY)) {
+    resetGame();
+  }
+});
+
+
 // Функция обработки нажатия на птицу
 function handleFlap() {
   if (bird.y - bird.radius > 0) { // Если птица не достигла верхней границы экрана, то "поднять" птицу
