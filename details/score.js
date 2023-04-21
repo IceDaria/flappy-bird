@@ -1,10 +1,10 @@
 // определяем класс счёта
 class Score {
-    constructor() {
+    constructor() {}
 // определяем переменные, рекорд проверяем на наличие в хранилище
-      this.highScore = parseInt(localStorage.getItem("highScore")) || 0;
-      this.currentScore = 0;
-    }
+      highScore = parseInt(localStorage.getItem("highScore")) || 0;
+      currentScore = 0;
+    
 
     draw() {
         if (state.current == state.game) { // рисуем счёт во время игры
