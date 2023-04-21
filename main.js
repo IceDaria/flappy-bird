@@ -39,14 +39,14 @@ document.addEventListener('keydown', (event) => {
 });
 
 // обработчик события для управления на телефоне
-canvas.addEventListener('touch', (event) => {
-  event.preventDefault();
-  if (state.current === state.game) {
-    handleFlap();
-  } else if (state.current === state.over && isClickOnStartBtn(event.touches[0].clientX, event.touches[0].clientY)) {
-    resetGame();
-  }
-});
+// canvas.addEventListener('touch', (event) => {
+  // event.preventDefault();
+ // if (state.current === state.game) {
+   // handleFlap();
+//  } else if (state.current === state.over && isClickOnStartBtn(event.touches[0].clientX, event.touches[0].clientY)) {
+ //   resetGame();
+//  }
+//});
 
 
 // Функция обработки нажатия на птицу
