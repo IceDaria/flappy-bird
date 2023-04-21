@@ -77,38 +77,24 @@ function resetGame() {
 
 // функция запуска игры и обратотки анимации
 function loop(){
-    bird.update();
-    pipes.update();
-    draw();
-    frames++;
-    
-    requestAnimationFrame(loop);
-}
-loop();
-
-// ВТОРОЙ ВАРИАНТ ФУНКЦИИ ЛУПА, НО ОН МНЕ НЕ КАЖЕТСЯ ОПТИМАЛЬНЫМ
-//let frameRate = 60; // Желаемая частота кадров (FPS)
-//let frameDelay = 1000 / frameRate; // Задержка между кадрами в миллисекундах
-
-//function loop(){
-   // let currentTime = performance.now();
-    //let elapsed = currentTime - lastFrameTime;
-    //if (elapsed < frameDelay) {
+    let currentTime = performance.now();
+    let elapsed = currentTime - lastFrameTime;
+    if (elapsed < frameDelay) {
     // Если прошло меньше времени, чем задержка между кадрами, ждем оставшееся время
-     // setTimeout(loop, frameDelay - elapsed);
-     // return;
-    //}
+      setTimeout(loop, frameDelay - elapsed);
+      return;
+    }
 
   // Обновляем последнее время кадра
-   // lastFrameTime = currentTime;
+    lastFrameTime = currentTime;
   
-   // pipes.update();
-   // bird.update();
-   // draw();
-   // frames++;
+    pipes.update();
+    bird.update();
+    draw();
+    frames++;
 
-   // requestAnimationFrame(loop);
-//}
+    requestAnimationFrame(loop);
+}
 
-// let lastFrameTime = performance.now();
-// loop();
+let lastFrameTime = performance.now();
+loop();
