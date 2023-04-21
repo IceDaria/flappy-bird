@@ -1,15 +1,22 @@
 // определяем класс труб
 class Pipes {
-  pipesArray = [];
-  top = {sX: 553, sY: 0}; // источник
-  bottom = {sX: 502, sY: 0};
-  w = 53;
-  h = 400;
-  gap = 85; // расстояние между верхней и нижней
-  maxYPos = -150;
-  distance = this.w * 3.5; // расстояние, с которым трубы отрисовываются
-  isCounted = false; // добавлено свойство для подсчета очков
+  constructor () {
+    this.pipesArray = [];
 
+    this.top = {sX: 553, sY: 0}; // источник
+    this.bottom = {sX: 502, sY: 0};
+
+    this.w = 53;
+    this.h = 400;
+
+    this.gap = 85; // расстояние между верхней и нижней
+    this.maxYPos = -150;
+
+    this.distance = this.w * 3.5; // расстояние, с которым трубы отрисовываются
+    this.isCounted = false; // добавлено свойство для подсчета очков
+  }
+
+// отрисовка труб
   draw() {
     this.pipesArray.forEach(pos => {
       const topYPos = pos.y;
